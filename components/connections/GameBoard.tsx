@@ -3,7 +3,7 @@ import { useGame } from "./GameProvider";
 import { Grid } from "./Grid";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
-import GameOverPopup from "./GameOverPopup";
+import Popup from "../general/GameOverPopup";
 
 // At the top of the file, add these colors
 const GROUP_COLORS = [
@@ -82,7 +82,21 @@ export function GameBoard() {
       )}
 
       {(gameComplete || isGameOver) && (
-        <GameOverPopup startNewGame={startNewGame} router={router} />
+        <Popup
+          title="Chanz, the game is joe-ver."
+          buttons={[
+            {
+              text: "Try again, pookie wookie?",
+              onClick: startNewGame,
+              className: "bg-yellow-400 hover:bg-yellow-500 text-black",
+            },
+            {
+              text: "Ok enough, back to home",
+              onClick: () => router.push("/"),
+              className: "bg-blue-400 hover:bg-blue-500 text-black",
+            },
+          ]}
+        />
       )}
     </div>
   );
