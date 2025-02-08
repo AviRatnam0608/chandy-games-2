@@ -23,13 +23,6 @@ export default function LetterVerificationPopup({
     "chandy",
   ];
 
-  //   const onCLickEnter = () => {
-  //     if (listOfAcceptableNicknames.includes(nicknames[0])) {
-  //       router.push("/letter");
-  //       .dismiss();
-  //     }
-  //   };
-
   const handleWelcome = () => {
     router.push("/letter");
     onClose();
