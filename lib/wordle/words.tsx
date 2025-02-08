@@ -1,7 +1,29 @@
-const solutionWords = ["chanz", "panzy", "rasam", "messi", "mazda"];
+interface Word {
+  word: string;
+  hint: string;
+}
 
-export function getRandomWord(): string {
-  console.log(solutionWords[Math.floor(Math.random() * solutionWords.length)]);
+const solutionWords: Word[] = [
+  { word: "chanz", hint: "A very cute person" },
+  { word: "panzy", hint: "A very cute person, alias" },
+  { word: "rasam", hint: "Your favorite food" },
+  { word: "messi", hint: "A very good football player" },
+  { word: "mazda", hint: "Avi's pookie number 1" },
+  { word: "india", hint: "country we met" },
+  { word: "banan", hint: "A fruit, and a person" },
+  { word: "pooki", hint: "nickname, without the e" },
+  { word: "cooki", hint: "nickname, without the e, and is a monster" },
+  { word: "apple", hint: "I think....." },
+  { word: "alexa", hint: "what's the weather like in Toronto?" },
+  { word: "cysms", hint: "intro for video calls, abbreviated" },
+  { word: "paris", hint: "who was here 🤨" },
+  {
+    word: "singr",
+    hint: "shes working late...., without the e",
+  },
+];
+
+export function getRandomWord(): Word {
   return solutionWords[Math.floor(Math.random() * solutionWords.length)];
 }
 

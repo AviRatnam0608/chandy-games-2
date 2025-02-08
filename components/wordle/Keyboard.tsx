@@ -30,11 +30,11 @@ export default function Keyboard() {
       for (let i = 0; i < guess.length; i++) {
         if (guess[i] !== keyLower) continue;
 
-        if (solution[i] === keyLower) {
+        if (solution.word[i] === keyLower) {
           status = "correct";
-        } else if (solution.includes(keyLower) && status !== "correct") {
+        } else if (solution.word.includes(keyLower) && status !== "correct") {
           status = "present";
-        } else if (!solution.includes(keyLower) && !status) {
+        } else if (!solution.word.includes(keyLower) && !status) {
           status = "absent";
         }
       }
