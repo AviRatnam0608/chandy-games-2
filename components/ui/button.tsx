@@ -38,6 +38,10 @@ const buttonVariants = cva(
           "w-full bg-teal-400 hover:bg-teal-500 text-black border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transform hover:-translate-y-1 transition-transform",
         brutal_lime:
           "w-full bg-lime-400 hover:bg-lime-500 text-black border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transform hover:-translate-y-1 transition-transform",
+        brutal_gray:
+          "w-full bg-gray-300 hover:bg-gray-400 text-black border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transform hover:-translate-y-1 transition-transform",
+        brutal_dark_gray:
+          "w-full bg-gray-500 hover:bg-gray-600 text-black border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transform hover:-translate-y-1 transition-transform",
       },
       size: {
         default: "h-10 px-4 py-2",
