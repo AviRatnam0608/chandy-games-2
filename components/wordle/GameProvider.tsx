@@ -6,7 +6,10 @@ import { getRandomWord, isValidWord } from "../../lib/wordle/words";
 interface GameContextType {
   guesses: string[];
   currentGuess: string;
-  solution: string;
+  solution: {
+    word: string;
+    hint: string;
+  };
   gameStatus: "playing" | "won" | "lost";
   addGuess: (guess: string) => void;
   updateCurrentGuess: (letter: string) => void;
@@ -39,7 +42,7 @@ export function GameProvider({ children }: { children: ReactNode }) {
     setGuesses(newGuesses);
     setCurrentGuess("");
 
-    if (guess.toLowerCase() === solution.toLowerCase()) {
+    if (guess.toLowerCase() === solution.word.toLowerCase()) {
       setGameStatus("won");
     } else if (newGuesses.length === 6) {
       setGameStatus("lost");

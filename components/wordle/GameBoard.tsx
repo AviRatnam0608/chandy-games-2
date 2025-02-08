@@ -5,15 +5,16 @@ import Popup from "../general/GameOverPopup";
 
 export default function GameBoard() {
   const { guesses, currentGuess, solution } = useGame();
+
   const emptyRows = Array(6 - guesses.length).fill("");
   const router = useRouter();
-  const getLetterStatus = (letter: string, position: number, word: string) => {
-    if (solution[position] === letter) return "correct";
-    if (solution.includes(letter)) return "present";
+  const getLetterStatus = (letter: string, position: number, guess: string) => {
+    if (solution.word[position] === letter) return "correct";
+    if (solution.word.includes(letter)) return "present";
     return "absent";
   };
 
-  const gameComplete = guesses.some((guess) => guess === solution);
+  const gameComplete = guesses.some((guess) => guess === solution.word);
   const gameLost = guesses.length === 6 && !gameComplete;
   const isGameOver = gameComplete || gameLost;
 
@@ -89,6 +90,12 @@ export default function GameBoard() {
             ))}
         </div>
       ))}
+
+      {!gameComplete && (
+        <div className="text-center text-xl font-bold">
+          Hint: {solution.hint}
+        </div>
+      )}
 
       {(gameComplete || gameLost) && (
         <Popup
