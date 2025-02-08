@@ -11,7 +11,8 @@ export function checkGuess(
 
 export function isGameComplete(
   foundGroups: string[][],
-  allGroups: string[][]
+  allGroups: string[][],
+  mistakes: number
 ): boolean {
-  return foundGroups.length === allGroups.length;
+  return foundGroups.length === allGroups.length || mistakes === 4;
 }

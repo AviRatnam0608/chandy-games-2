@@ -2,7 +2,6 @@
 
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { getRandomPuzzle } from "@/lib/connections/data";
-import { checkGuess, isGameComplete } from "@/lib/connections/gameLogic";
 
 interface Group {
   words: string[];
@@ -23,6 +22,7 @@ interface GameContextType {
   toggleTile: (index: number) => void;
   submitGuess: () => void;
   gameComplete: boolean;
+  startNewGame: () => void;
 }
 
 const GameContext = createContext<GameContextType | undefined>(undefined);
@@ -89,6 +89,13 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
 
   const gameComplete = foundGroupsWithThemes.length === puzzle.groups.length;
 
+  const startNewGame = () => {
+    setPuzzle(getRandomPuzzle());
+    setFoundGroupsWithThemes([]);
+    setMistakes(0);
+    setSelectedTiles([]);
+  };
+
   return (
     <GameContext.Provider
       value={{
@@ -100,6 +107,7 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
         toggleTile,
         submitGuess,
         gameComplete,
+        startNewGame,
       }}
     >
       {children}

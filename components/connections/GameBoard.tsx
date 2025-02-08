@@ -1,35 +1,45 @@
 "use client";
-
 import { useGame } from "./GameProvider";
 import { Grid } from "./Grid";
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
+import GameOverPopup from "./GameOverPopup";
 
 // At the top of the file, add these colors
 const GROUP_COLORS = [
-  "bg-yellow-200",
-  "bg-green-200",
-  "bg-blue-200",
-  "bg-purple-200",
+  "bg-yellow-300",
+  "bg-green-300",
+  "bg-blue-300",
+  "bg-purple-300",
 ];
 
 export function GameBoard() {
+  const router = useRouter();
   const {
     mistakes,
     submitGuess,
     selectedTiles,
     gameComplete,
     foundGroupsWithThemes,
+    startNewGame,
   } = useGame();
 
-  const randomPastelColor =
-    "#" + Math.floor(Math.random() * 16777215).toString(16);
-
-  console.log(randomPastelColor);
+  const isGameOver = mistakes >= 4;
 
   return (
     <div className="w-full max-w-md mx-auto p-4">
       <div className="mb-4 flex justify-between items-center">
-        <div>Mistakes: {mistakes}/4</div>
+        <span>Mistakes</span>
+        <div className="flex gap-1">
+          {[...Array(4)].map((_, i) => (
+            <div
+              key={i}
+              className={`w-2 h-2 rounded-full ${
+                i < mistakes ? "bg-red-500" : "bg-gray-800"
+              }`}
+            />
+          ))}
+        </div>
         {gameComplete && <div>Game Complete!</div>}
       </div>
 
@@ -45,10 +55,9 @@ export function GameBoard() {
               {group.words.map((word, wordIndex) => (
                 <div
                   key={wordIndex}
-                  className={`${GROUP_COLORS[index].replace(
-                    "200",
-                    "100"
-                  )} p-1 text-center rounded text-sm`}
+                  className={`${GROUP_COLORS[index]
+                    .replace("bg-", "bg-")
+                    .replace("-300", "-200")} p-1 text-center rounded text-sm`}
                 >
                   {word}
                 </div>
@@ -60,13 +69,21 @@ export function GameBoard() {
 
       <Grid />
 
-      <Button
-        onClick={submitGuess}
-        disabled={selectedTiles.length !== 4}
-        className="w-full mt-4"
-      >
-        Submit
-      </Button>
+      {mistakes < 4 && !gameComplete && (
+        <div className="mt-4">
+          <Button
+            onClick={submitGuess}
+            disabled={selectedTiles.length !== 4}
+            variant="brutal_lime"
+          >
+            Submit
+          </Button>
+        </div>
+      )}
+
+      {(gameComplete || isGameOver) && (
+        <GameOverPopup startNewGame={startNewGame} router={router} />
+      )}
     </div>
   );
 }
