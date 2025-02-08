@@ -1,6 +1,0 @@
-{
-  "/wordle/page": "app/wordle/page.js",
-  "/page": "app/page.js",
-  "/connections/page": "app/connections/page.js",
-  "/letter/page": "app/letter/page.js"
-}
