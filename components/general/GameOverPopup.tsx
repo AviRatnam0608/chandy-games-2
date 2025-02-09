@@ -16,9 +16,13 @@ export default function Popup({ title, buttons }: PopupProps) {
     "w-full border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transform hover:-translate-y-1 transition-transform";
 
   // Find the close button handler or use the first button's handler as fallback
-  const handleClose =
-    buttons.find((b) => b.text.toLowerCase().includes("close"))?.onClick ||
-    buttons[0]?.onClick;
+  const handleClose = (e?: React.MouseEvent) => {
+    e?.preventDefault();
+    const closeHandler =
+      buttons.find((b) => b.text.toLowerCase().includes("close"))?.onClick ||
+      buttons[0]?.onClick;
+    closeHandler();
+  };
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">

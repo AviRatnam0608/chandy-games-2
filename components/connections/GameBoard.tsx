@@ -7,7 +7,7 @@ import Popup from "../general/GameOverPopup";
 
 // At the top of the file, add these colors
 const GROUP_COLORS = [
-  "bg-yellow-300",
+  "bg-red-300",
   "bg-green-300",
   "bg-blue-300",
   "bg-purple-300",
@@ -70,13 +70,20 @@ export function GameBoard() {
       <Grid />
 
       {mistakes < 4 && !gameComplete && (
-        <div className="mt-4">
+        <div className="mt-4 flex gap-2">
           <Button
             onClick={submitGuess}
             disabled={selectedTiles.length !== 4}
             variant="brutal_lime"
           >
             Submit
+          </Button>
+          <Button
+            onClick={startNewGame}
+            variant="brutal_green"
+            className="w-1/2"
+          >
+            New Game
           </Button>
         </div>
       )}
